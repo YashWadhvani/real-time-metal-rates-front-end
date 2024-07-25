@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import { GOOGLE_FIREBASE_API } from "@env";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyChRepM2klxmD4yP01rlXPQF2_37OmMoVE",
+  apiKey: `${GOOGLE_FIREBASE_API}`,
   authDomain: "real-time-metal-price.firebaseapp.com",
   projectId: "real-time-metal-price",
   storageBucket: "real-time-metal-price.appspot.com",
