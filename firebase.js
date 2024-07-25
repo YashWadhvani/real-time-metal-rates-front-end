@@ -1,16 +1,24 @@
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
-import { GOOGLE_FIREBASE_API } from "@env";
+import {
+  GOOGLE_FIREBASE_API,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID,
+} from "@env";
 
 const firebaseConfig = {
   apiKey: `${GOOGLE_FIREBASE_API}`,
-  authDomain: "real-time-metal-price.firebaseapp.com",
-  projectId: "real-time-metal-price",
-  storageBucket: "real-time-metal-price.appspot.com",
-  messagingSenderId: "51560970768",
-  appId: "1:51560970768:web:e1c12f341d123470e52895",
-  measurementId: "G-G7R04C3MW3",
+  authDomain: `${AUTH_DOMAIN}`,
+  projectId: `${PROJECT_ID}`,
+  storageBucket: `${STORAGE_BUCKET}`,
+  messagingSenderId: `${MESSAGING_SENDER_ID}`,
+  appId: `${APP_ID}`,
+  measurementId: `${MEASUREMENT_ID}`,
 };
 
 const app = initializeApp(firebaseConfig);
