@@ -1,9 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Text, ActivityIndicator } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
+import { Text, ActivityIndicator, Avatar, Icon } from "react-native-paper";
+import { StatusBar } from "expo-status-bar";
 import { AuthContext } from "../contexts/AuthContext";
 import { METALS_API_KEY } from "@env";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function HomeScreen({ navigation }) {
   const [metalRates, setMetalRates] = useState(null);
@@ -28,8 +29,7 @@ export default function HomeScreen({ navigation }) {
   };
 
   const fetchMetalRates = async () => {
-    const url = `https://api.metals.dev/v1/latest?api_key=${METALS_API_KEY}&unit=toz&metal=gold,silver&currency=USD`;
-
+    // const url = `https://api.metals.dev/v1/latest?api_key=${METALS_API_KEY}&unit=toz&metal=gold,silver&currency=USD`;
     try {
       const response = await fetch(url, {
         headers: {
@@ -73,12 +73,26 @@ export default function HomeScreen({ navigation }) {
     return usdRate * conversionFactor * exchangeRate;
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+          <Avatar.Image
+            size={40}
+            source={
+              user?.photoURL
+                ? { uri: user.photoURL }
+                : require("../assets/avatar.png")
+            }
+            style={{ marginRight: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, user]);
+
   return (
     <View style={styles.container}>
-      <Button mode="contained" onPress={() => navigation.navigate("Dashboard")}>
-        Show Dashboard
-      </Button>
-
       <Text style={styles.header}>Live Metal Rates Today!</Text>
       {loading && <ActivityIndicator animating={true} />}
       {error && <Text style={styles.errorText}>{error}</Text>}

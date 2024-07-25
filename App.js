@@ -1,5 +1,5 @@
 import React from "react";
-import { Provider as PaperProvider } from "react-native-paper";
+import { IconButton, Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./screens/LoginScreen";
@@ -62,8 +62,34 @@ export default function App() {
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Signup" component={SignupScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <IconButton
+                    // icon={require("../front-end/assets/default-avatar.png")}
+                    size={40}
+                    onPress={() => navigation.navigate("Dashboard")}
+                    iconColor={theme.colors.primary}
+                  />
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="Dashboard"
+              component={DashboardScreen}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <IconButton
+                    icon={require("../front-end/assets/home.png")}
+                    size={40}
+                    onPress={() => navigation.navigate("Home")}
+                    iconColor={theme.colors.primary}
+                  />
+                ),
+              })}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </AuthProvider>
